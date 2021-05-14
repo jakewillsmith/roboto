@@ -6,7 +6,7 @@
 
 /*******************************BeginSetUp*****************************************************************************/
 var Bot = require('ttapi');
-var AUTH = '#############'; //set the auth of your bot here.
+var AUTH = 'piKXmKQTEndpISdeGMwiuLLb'; //set the auth of your bot here.
 var USERID = '6042b4ffc2dbd9001bb370c5'; //set the userid of your bot here.
 var ROOMID = '604063be3f4bfc001be4c546'; //set the roomid of the room you want the bot to go to here.
 var playLimit = 3; //set the playlimit here (default 4 songs)
@@ -29,7 +29,7 @@ global.masterIds = ['604056db3f4bfc001be4c22f']; //example (clear this before us
 					   */
 
 //this is for the bot's autodjing(triggers on new song, bot also gets on when no song is playing, unless autodjing is turned off)
-var whenToGetOnStage = 2; //when this many or less people djing the bot will get on stage(only if autodjing is enabled)
+var whenToGetOnStage = 1; //when this many or less people djing the bot will get on stage(only if autodjing is enabled)
 var whenToGetOffStage = 3; //when this many people are on stage and auto djing is enabled the bot will get off stage(note: the bot counts as one person)
 
 var roomJoinMessage = ''; //the message users will see when they join the room, leave it empty for the default message (only works when greet is turned on)
@@ -184,6 +184,7 @@ global.songLimitTimer = null; //holds the timer used to remove a dj off stage if
 global.beginTimer = null; //holds the timer the auto removes dj's from the queue if they do not get on stage within the allowed time period
 
 var bot = new Bot(AUTH, USERID, ROOMID); //initializes the bot
+bot.debug = true;
 bot.listen(process.env.PORT,process.env.IP); //needed for running the bot on a server
 
 
@@ -660,7 +661,7 @@ global.autoDjing = function ()
         }
         else //else it is on stage
         {
-            if (currentDjs.length >= whenToGetOffStage && getonstage === true && checkWhoIsDj != USERID)
+           if (currentDjs.length >= whenToGetOffStage && getonstage === true && checkWhoIsDj != USERID)
             {
                 bot.remDj();
             }
@@ -991,7 +992,7 @@ bot.on('newsong', function (data)
 
 
     //set information
-    current = data.room.metadata.djcount; //the number of dj's on stage
+    current = data.room.metadata.djcount + 1; //the number of dj's on stage
     detail = data.room.description; //set room description again in case it was changed
     checkWhoIsDj = data.room.metadata.current_dj; //used to check who the currently playing dj is.
     dj = data.room.metadata.current_song.djname; //used to get current dj's name.
@@ -1101,11 +1102,11 @@ bot.on('newsong', function (data)
 
     //quality control check, if current dj's information is somehow wrong because
     //of some event not firing, remake currentDj's array
-    if (data.room.metadata.djcount !== currentDjs.length)
+    if ( (data.room.metadata.djcount + 1) !== currentDjs.length)
     {
         currentDjs = []; //reset current djs array
 
-        for (var hjg = 0; hjg < data.room.metadata.djcount; hjg++)
+        for (var hjg = 0; hjg < data.room.metadata.djcount + 1; hjg++)
         {
             if (typeof data.room.metadata.djs[hjg] !== 'undefined')
             {
