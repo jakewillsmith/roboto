@@ -6,7 +6,7 @@
 
 /*******************************BeginSetUp*****************************************************************************/
 var Bot = require('ttapi');
-var AUTH = 'piKXmKQTEndpISdeGMwiuLLb'; //set the auth of your bot here.
+var AUTH = 'XXX'; //set the auth of your bot here.
 var USERID = '6042b4ffc2dbd9001bb370c5'; //set the userid of your bot here.
 var ROOMID = '604063be3f4bfc001be4c546'; //set the roomid of the room you want the bot to go to here.
 var playLimit = 3; //set the playlimit here (default 4 songs)
