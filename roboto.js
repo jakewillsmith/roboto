@@ -6,7 +6,7 @@
 
 /*******************************BeginSetUp*****************************************************************************/
 var Bot = require('ttapi');
-var AUTH = 'XXX'; //set the auth of your bot here.
+var AUTH = '#############'; //set the auth of your bot here.
 var USERID = '6042b4ffc2dbd9001bb370c5'; //set the userid of your bot here.
 var ROOMID = '604063be3f4bfc001be4c546'; //set the roomid of the room you want the bot to go to here.
 var playLimit = 3; //set the playlimit here (default 4 songs)
@@ -184,7 +184,7 @@ global.songLimitTimer = null; //holds the timer used to remove a dj off stage if
 global.beginTimer = null; //holds the timer the auto removes dj's from the queue if they do not get on stage within the allowed time period
 
 var bot = new Bot(AUTH, USERID, ROOMID); //initializes the bot
-bot.debug = true;
+// bot.debug = true;
 bot.listen(process.env.PORT,process.env.IP); //needed for running the bot on a server
 
 
